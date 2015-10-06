@@ -36,7 +36,8 @@ public class EventController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Event createEvent(@RequestParam("description") String description, @RequestParam("type") String type,
             @RequestParam("partyId") String partyId,
-            @RequestParam("date") @DateTimeFormat(iso = ISO.DATE_TIME) Date date) {
-        return eventUtils.createEvent(description, type, partyId, date);
+            @RequestParam("date") @DateTimeFormat(iso = ISO.DATE_TIME) Date date,
+            @RequestParam("reporterUserId") String reporterUserId) {
+        return eventUtils.createEvent(description, type, partyId, date, reporterUserId);
     }
 }

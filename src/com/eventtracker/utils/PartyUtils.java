@@ -18,9 +18,9 @@ public class PartyUtils {
         this.partyRepository = partyRepository;
     }
 
-    public Party createParty(String name, String descrtipion) {
+    public Party createParty(String name, String descrtipion, String ownerUserId) {
         String partyId = UUID.randomUUID().toString();
-        Party party = new Party(partyId, name, descrtipion);
+        Party party = new Party(partyId, name, descrtipion, ownerUserId);
         return partyRepository.createParty(party);
     }
 

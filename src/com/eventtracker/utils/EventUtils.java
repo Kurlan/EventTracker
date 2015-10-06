@@ -20,9 +20,9 @@ public class EventUtils {
         this.eventRepository = eventRepository;
     }
 
-    public Event createEvent(String description, String type, String partyId, Date date) {
+    public Event createEvent(String description, String type, String partyId, Date date, String reporterUserId) {
         String eventId = UUID.randomUUID().toString();
-        Event event = new Event(eventId, description, type, partyId, date);
+        Event event = new Event(eventId, description, type, partyId, date, reporterUserId);
         return eventRepository.createEvent(event);
     }
 
