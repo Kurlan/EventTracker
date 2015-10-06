@@ -1,7 +1,5 @@
 package com.eventtracker.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,22 +15,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "event")
-public class Event {
+@Table(name = "party")
+public class Party {
 
     @Id
     @Column(name = "id")
     private String id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "description")
     private String description;
-
-    @Column(name = "type")
-    private String type;
-
-    @Column(name = "party_id")
-    private String partyId;
-
-    @Column(name = "date")
-    private Date date;
 }
