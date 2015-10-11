@@ -1,5 +1,7 @@
 package com.eventtracker.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +30,18 @@ public class PartyController {
         return partyUtils.getParty(partyId);
     }
 
+    @RequestMapping(value = "/byUser/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Party> getPartyByUser(@PathVariable String userId) {
+        return partyUtils.getPartyByUser(userId);
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Party createParty(@RequestParam String name, @RequestParam String description,
-            @RequestParam("ownerUserId") String ownerUserId) {
+            @RequestParam("userId") String userId, @RequestParam("relationshipType") String relationshipType,
+            @RequestParam(value = "photoURL", required = false) String photoURL) {
 
-        return partyUtils.createParty(name, description, ownerUserId);
+        return partyUtils.createParty(name, description, userId, relationshipType, photoURL);
     }
 }

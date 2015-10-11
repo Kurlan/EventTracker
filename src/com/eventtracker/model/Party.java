@@ -27,8 +27,9 @@ public class Party {
 
     @Column(name = "description")
     private String description;
-    
-    @Column(name = "owner_user_id")
-    private String ownerUserId;
 
+    @Column(name = "photo_url")
+    private String photoURL;
+    
+    
 }

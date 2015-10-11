@@ -8,5 +8,6 @@
         <mapping class="com.eventtracker.model.Party" />
         <mapping class="com.eventtracker.model.Event" />
         <mapping class="com.eventtracker.model.User" />
+        <mapping class="com.eventtracker.model.UserParty" />
     </session-factory>
 </hibernate-configuration>

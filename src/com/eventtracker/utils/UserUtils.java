@@ -12,12 +12,12 @@ import com.eventtracker.repository.UserRepository;
 public class UserUtils {
 
     private final UserRepository userRepository;
-    
+
     @Autowired
     public UserUtils(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
+
     public User createUser(String name, String email) {
         String userId = UUID.randomUUID().toString();
         User user = new User(userId, name, email);

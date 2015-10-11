@@ -15,16 +15,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "event_tracker_user")
-public class User {
-
+@Table(name = "user_party")
+public class UserParty {
     @Id
     @Column(name = "id")
     private String id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "user_id")
+    private String userId;
+    
+    @Column(name = "party_id")
+    private String partyId;
+    
+    @Column(name = "type")
+    private String type;
 
-    @Column(name = "email")
-    private String email;
 }

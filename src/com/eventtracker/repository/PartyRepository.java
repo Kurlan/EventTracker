@@ -1,6 +1,9 @@
 package com.eventtracker.repository;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eventtracker.model.Party;
+import com.eventtracker.model.UserParty;
 
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -23,11 +27,12 @@ public class PartyRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public Party createParty(Party party) {
+    public Party createParty(Party party, UserParty userParty) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
+            session.save(userParty);
             session.save(party);
             transaction.commit();
         } catch (Exception e) {
@@ -64,6 +69,35 @@ public class PartyRepository {
             session.close();
         }
         return party;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Party> getPartiesByUserId(String userId) {
+        Session session = sessionFactory.openSession();
+        log.info("Getting parties by userId: " + userId);
+        Transaction transaction = null;
+        List<Party> parties = null;
+
+        try {
+            transaction = session.beginTransaction();
+            Query query = session
+                    .createSQLQuery(
+                            "select * from party as p inner join user_party as up on up.party_id = p.id where user_id = :user_id")
+                    .addEntity(Party.class);
+
+            query.setParameter("user_id", userId);
+            parties = query.list();
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return parties;
     }
 
 }
