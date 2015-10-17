@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.eventtracker.model.Party;
 import com.eventtracker.model.UserParty;
 import com.eventtracker.repository.PartyRepository;
+import com.google.common.collect.ImmutableList;
 
 @Service
 public class PartyUtils {
@@ -33,7 +34,8 @@ public class PartyUtils {
     }
 
     public List<Party> getPartyByUser(String userId) {
-        return partyRepository.getPartiesByUserId(userId);
+        List<Party> parties = partyRepository.getPartiesByUserId(userId);
+        return parties != null ? parties : ImmutableList.of();
     }
 
 }
